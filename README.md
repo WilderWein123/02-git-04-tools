@@ -19,7 +19,8 @@
 
 В клонированном репозитории:
 
-1. Найдите полный хеш и комментарий коммита, хеш которого начинается на `aefea`.
+>1. Найдите полный хеш и комментарий коммита, хеш которого начинается на `aefea`.
+git log показывает все хеши, в которых есть указанное совпадение, в первую очередь при этом идет совпадение с начала хеша. Дальнейшее выполнение прерываем нажатием q:
 ```
 git log aefea
 commit aefead2207ef7e2aa5dc81a34aedf0cad4c32545
@@ -29,11 +30,12 @@ Date:   Thu Jun 18 10:29:58 2020 -0400
     Update CHANGELOG.md
 
 ````
-git log показывает все хеши, в которых есть указанное совпадение, в первую очередь при этом идет совпадение с начала хеша. Дальнейшее выполнение прерываем нажатием q.
 
 2. Ответьте на вопросы.
 
-* Какому тегу соответствует коммит `85024d3`?
+>* Какому тегу соответствует коммит `85024d3`?
+Аналогично предыдущему. Тег будет написан рядом с хешом коммита в скобках.
+
 ```
 git log 85024d3
 commit 85024d3100126de36331c6982bfaac02cdab9e76 (tag: v0.12.23)
@@ -42,17 +44,14 @@ Date:   Thu Mar 5 20:56:10 2020 +0000
 
     v0.12.23
 ```
-Аналогично предыдущему. Тег будет написан рядом с хешом коммита в скобках.
 
-* Сколько родителей у коммита `b8d720`? Напишите их хеши.
-
+> * Сколько родителей у коммита `b8d720`? Напишите их хеши.
+Это merge-коммит, поэтому родителей у него два. Их хеши:
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git show b8d720^
 commit 56cd7859e05c36c06b56d013b55a252d0bb7e158
 Merge: 58dcac4b79 ffbcf55817
-```
-Это merge-коммит, поэтому родителей у него два. Их хеши:
-```
+
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git show 58dcac4b79 | head -n 1
 commit 58dcac4b798f0a2421170d84e507a42838101648
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git show ffbcf55817 | head -n 1
@@ -60,7 +59,8 @@ commit ffbcf55817cb96f6d5ffe1a34abe963b159bf34e
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ 
 ```
 
-* Перечислите хеши и комментарии всех коммитов, которые были сделаны между тегами  v0.12.23 и v0.12.24.
+> * Перечислите хеши и комментарии всех коммитов, которые были сделаны между тегами  v0.12.23 и v0.12.24.
+
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git log 'v0.12.23..v0.12.24' --oneline
 33ff1c03bb (tag: v0.12.24) v0.12.24
@@ -75,16 +75,16 @@ dd01a35078 Update CHANGELOG.md
 225466bc3e Cleanup after v0.12.23 release
 ```
 
-* Найдите коммит, в котором была создана функция `func providerSource`, её определение в коде выглядит так: `func providerSource(...)` (вместо троеточия перечислены аргументы).
+> * Найдите коммит, в котором была создана функция `func providerSource`, её определение в коде выглядит так: `func providerSource(...)` (вместо троеточия перечислены аргументы).
+Раз нам нужно создание, значит это первый коммит (в списке последний). Отрезаем последнюю строчку (tail -n 1).
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git log -SproviderSource --oneline | tail -n 1
 5e06e39fcc Use registry alias to fetch providers
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ 
 ```
 
-Раз нам нужно создание, значит это первый коммит (в списке последний). Отрезаем последнюю строчку (tail -n 1).
+> * Найдите все коммиты, в которых была изменена функция `globalPluginDirs`.
 
-* Найдите все коммиты, в которых была изменена функция `globalPluginDirs`.
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git log -SglobalPluginDirs --oneline
 65c4ba7363 Remove terraform binary
@@ -97,7 +97,9 @@ c0b1761096 prevent log output during init
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ 
 ```
 
-* Кто автор функции `synchronizedWriters`? 
+> * Кто автор функции `synchronizedWriters`? 
+Сначала ищем первый коммит (в списке последний) по указанному запросу, а потом делаем git show на его хеш.
+В резльтате получаем автор Martin Atkins <mart@degeneration.co.uk>
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git log -SsynchronizedWriters --oneline | tail -n 1
 5ac311e2a9 main: synchronize writes to VT100-faker on Windows
@@ -106,8 +108,6 @@ commit 5ac311e2a91e381e2f52234668b49ba670aa0fe5
 Author: Martin Atkins <mart@degeneration.co.uk>
 Date:   Wed May 3 16:25:41 2017 -0700
 ```
-Сначала ищем первый коммит (в списке последний) по указанному запросу, а потом делаем git show на его хеш.
-В резльтате получаем автор Martin Atkins <mart@degeneration.co.uk>
 
 *В качестве решения ответьте на вопросы и опишите, как были получены эти ответы.*
 
