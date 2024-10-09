@@ -20,7 +20,9 @@
 В клонированном репозитории:
 
 1. >Найдите полный хеш и комментарий коммита, хеш которого начинается на `aefea`.
+
 git log показывает все хеши, в которых есть указанное совпадение, в первую очередь при этом идет совпадение с начала хеша. Дальнейшее выполнение прерываем нажатием q:
+
 ```
 git log aefea
 commit aefead2207ef7e2aa5dc81a34aedf0cad4c32545
@@ -34,6 +36,7 @@ Date:   Thu Jun 18 10:29:58 2020 -0400
 2. Ответьте на вопросы.
 
 * >Какому тегу соответствует коммит `85024d3`?
+
 Аналогично предыдущему. Тег будет написан рядом с хешом коммита в скобках.
 
 ```
@@ -46,6 +49,7 @@ Date:   Thu Mar 5 20:56:10 2020 +0000
 ```
 
  * >Сколько родителей у коммита `b8d720`? Напишите их хеши.
+
 Это merge-коммит, поэтому родителей у него два. Их хеши:
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git show b8d720^
@@ -76,7 +80,9 @@ dd01a35078 Update CHANGELOG.md
 ```
 
  * >Найдите коммит, в котором была создана функция `func providerSource`, её определение в коде выглядит так: `func providerSource(...)` (вместо троеточия перечислены аргументы).
+
 Раз нам нужно создание, значит это первый коммит (в списке последний). Отрезаем последнюю строчку (tail -n 1).
+
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git log -SproviderSource --oneline | tail -n 1
 5e06e39fcc Use registry alias to fetch providers
@@ -98,8 +104,10 @@ seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$
 ```
 
  * >Кто автор функции `synchronizedWriters`? 
+
 Сначала ищем первый коммит (в списке последний) по указанному запросу, а потом делаем git show на его хеш.
 В резльтате получаем автор Martin Atkins <mart@degeneration.co.uk>
+
 ```
 seregin@msk-s3-arm076:~/scripts/edu/git4/terraform$ git log -SsynchronizedWriters --oneline | tail -n 1
 5ac311e2a9 main: synchronize writes to VT100-faker on Windows
